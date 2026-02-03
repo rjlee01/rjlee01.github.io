@@ -118,21 +118,31 @@ body{
   padding: 10px 14px;
   border-radius: 12px;
   background: var(--accent);
-  color: white;
+  color: #ffffff;
   font-weight: 700;
   border: 1px solid rgba(11,18,32,.25);
+  text-decoration: none;
 }
-.btn:hover{filter: brightness(1.06)}
+
+.btn:hover{
+  filter: brightness(1.06);
+  color: #ffffff;
+}
+
 .btn.ghost{
   background: transparent;
   color: var(--text);
   border: 1px solid var(--line);
 }
-.btn.ghost:hover{border-color: rgba(251, 252, 255, 0.22)}
 
-.btn,
-.btn:visited {
-  color: #ffffff !important;
+.btn.ghost:hover{
+  background: rgba(15,23,42,.04);
+  border-color: rgba(15,23,42,.22);
+  color: var(--text);
+}
+
+.btn:visited{
+  color: inherit;
 }
 
 /* ===== hero ===== */
