@@ -137,12 +137,15 @@ body{
 
 .btn.ghost:hover{
   background: rgba(15,23,42,.04);
-  border-color: rgba(15,23,42,.22);
+  border-color: rgba(249, 251, 255, 0.963);
   color: var(--text);
 }
 
 .btn:visited{
-  color: inherit;
+  color: #ffffff;
+}
+.btn.ghost:visited{
+  color: var(--text);
 }
 
 /* ===== hero ===== */
