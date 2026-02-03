@@ -1,102 +1,295 @@
 :root{
-  --bg:#0b1020;
-  --bg2:#0f1733;
-  --card:#121b3b;
-  --text:#e7ebff;
-  --muted:#a9b2e5;
-  --accent:#7c5cff;
-  --line:rgba(231,235,255,.12);
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #0b1220;
+  --muted: #5b6475;
+  --line: rgba(15, 23, 42, .12);
+
+  /* finance accents */
+  --navy: #0b1220;
+  --green: #0a7a4b;
+  --accent: #0b1220;  /* keep it institutional */
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
 body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  background: radial-gradient(1200px 600px at 20% 0%, rgba(124,92,255,.18), transparent 60%),
-              radial-gradient(900px 500px at 80% 10%, rgba(0,200,255,.10), transparent 60%),
-              linear-gradient(180deg, var(--bg), var(--bg2));
-  color:var(--text);
-  line-height:1.5;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.55;
 }
 
-a{color:inherit;text-decoration:none}
-.container{max-width:1080px;margin:0 auto;padding:0 20px}
+/* ===== background like your references ===== */
+.bg-grid{
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(15,23,42,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15,23,42,.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
 
+.bg-orb{
+  position: fixed;
+  width: 900px;
+  height: 900px;
+  border-radius: 999px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 50% 50%, rgba(11,18,32,.06), rgba(11,18,32,0) 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== “rounded canvas” page ===== */
+.page{
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 56px auto;
+  padding: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, .12);
+  overflow: hidden;
+}
+
+/* container inside the panel */
+.container{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ===== nav inside the panel ===== */
 .nav{
-  position:sticky; top:0;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(10px);
-  background: rgba(11,16,32,.65);
-  border-bottom:1px solid var(--line);
-  z-index:20;
+  border-bottom: 1px solid var(--line);
+  z-index: 20;
 }
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{font-weight:700;letter-spacing:.2px}
-.nav-links{display:flex;gap:18px;align-items:center}
-.nav-links a{color:var(--muted)}
-.nav-links a:hover{color:var(--text)}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 18px 0;
+}
+.brand{
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: var(--navy);
+}
+.nav-links{
+  display:flex;
+  gap: 18px;
+  align-items:center;
+}
+.nav-links a{
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+.nav-links a:hover{color: var(--text)}
 
+/* ===== buttons: finance / institutional ===== */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 14px;border-radius:12px;
-  background:var(--accent);color:white;font-weight:600;
-  border:1px solid rgba(124,92,255,.35);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  border: 1px solid rgba(11,18,32,.25);
 }
-.btn:hover{filter:brightness(1.08)}
-.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
-.btn.ghost:hover{border-color:rgba(231,235,255,.25)}
+.btn:hover{filter: brightness(1.06)}
+.btn.ghost{
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.btn.ghost:hover{border-color: rgba(15,23,42,.22)}
 
-.hero{padding:70px 0 40px}
-.hero-grid{display:grid;grid-template-columns: 1.3fr .9fr; gap:22px}
+/* ===== hero ===== */
+.hero{
+  padding: 64px 0 24px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.25fr .85fr;
+  gap: 22px;
+  align-items: start;
+}
+
 .pill{
-  display:inline-block;
-  padding:6px 10px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  color:var(--muted);
-  font-size:13px;
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  background: rgba(15,23,42,.03);
 }
-h1{font-size:44px;line-height:1.08;margin:14px 0 10px}
-.sub{color:var(--muted);font-size:17px;max-width:58ch}
-.cta{display:flex;gap:12px;margin:18px 0 10px}
-.meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.pill::before{
+  content: "●";
+  font-size: 10px;
+  color: var(--green);
+}
 
-.section{padding:54px 0}
-.section.alt{background: rgba(255,255,255,.03); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
-.section-head{margin-bottom:18px}
-.section-head h2{margin:0 0 6px;font-size:28px}
-.section-head p{margin:0;color:var(--muted)}
+h1{
+  font-size: 44px;
+  line-height: 1.08;
+  margin: 16px 0 10px;
+  letter-spacing: -.6px;
+}
 
-.grid{display:grid;grid-template-columns: repeat(3, 1fr); gap:16px}
-.stack{display:flex;flex-direction:column;gap:14px}
+.sub{
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 60ch;
+}
+
+.cta{
+  display:flex;
+  gap: 12px;
+  margin: 18px 0 10px;
+}
+
+.meta{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ===== section styling like clean portfolio templates ===== */
+.section{
+  padding: 42px 0;
+  border-top: 1px solid rgba(15,23,42,.06);
+}
+
+.section-head{
+  margin-bottom: 16px;
+}
+.section-head h2{
+  margin: 0 0 6px;
+  font-size: 22px;
+  letter-spacing: -.3px;
+}
+.section-head p{
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ===== cards: minimal, tight, finance ===== */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.stack{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .card{
-  background: rgba(18,27,59,.65);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
 }
-.card h3{margin:0 0 8px}
-.card p{margin:0 0 10px;color:var(--muted)}
-.hero-card ul{margin:10px 0 0 18px;color:var(--muted)}
-.links{margin-top:12px;display:flex;flex-direction:column;gap:8px}
 
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 12px}
+.card h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  letter-spacing: -.2px;
+}
+.card p{
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tags{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 12px;
+}
 .tags span{
-  font-size:12px;color:var(--muted);
-  border:1px solid var(--line);
-  padding:4px 8px;border-radius:999px;
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid rgba(15,23,42,.12);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15,23,42,.02);
 }
 
-.row{display:flex;justify-content:space-between;gap:14px;align-items:center}
-.link{color: #cfd6ff}
-.link:hover{text-decoration:underline}
+/* make one tag look like "ticker" */
+.tags span:first-child{
+  color: var(--green);
+  border-color: rgba(10,122,75,.22);
+  background: rgba(10,122,75,.06);
+}
 
-.footer{padding:28px 0;color:var(--muted)}
-.muted{color:var(--muted)}
+/* row cards */
+.row{
+  display:flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
 
+.link{
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 14px;
+}
+.link:hover{text-decoration: underline}
+
+.footer{
+  padding: 26px 0;
+  color: var(--muted);
+  border-top: 1px solid rgba(15,23,42,.06);
+}
+.muted{color: var(--muted)}
+
+/* responsive */
 @media (max-width: 920px){
-  .hero-grid{grid-template-columns:1fr}
-  .grid{grid-template-columns:1fr}
-  h1{font-size:36px}
+  .page{margin: 18px 14px; border-radius: 22px;}
+  .hero-grid{grid-template-columns: 1fr}
+  .grid{grid-template-columns: 1fr}
+  h1{font-size: 34px}
 }
+
+.ticker{
+  margin-top: 16px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.ticker span{
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px dashed rgba(15,23,42,.18);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15,23,42,.02);
+}
+.ticker span:first-child{ color: var(--green); border-color: rgba(10,122,75,.28); }
