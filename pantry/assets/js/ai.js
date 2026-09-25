@@ -32,7 +32,7 @@ async function claudeChat(systemPrompt, userMessage) {
   return data.content[0].text;
 }
 
-async function generateAIRecipe(userPrompt, pantryItems) {
+async function generateAIRecipe_ai(userPrompt, pantryItems) {
   const ingredientList = pantryItems.map(i => `${i.name}${i.quantity ? " (" + i.quantity + " " + (i.unit||"") + ")" : ""}`).join(", ");
   const system = `You are a creative chef and recipe developer. The user has these ingredients available: ${ingredientList || "various pantry staples"}.
 Suggest a delicious recipe using mainly these ingredients. Format your response as:

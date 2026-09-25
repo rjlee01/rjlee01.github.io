@@ -3,235 +3,306 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stocked Fridge — Kitchen Tracker</title>
-  <meta name="description" content="Track your kitchen inventory, discover recipes, and analyze your cooking and baking.">
+  <title>Stocked Fridge</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <div class="bg-grid"></div>
 
   <!-- ── PASSWORD GATE ── -->
   <div id="gate">
     <div class="gate-card">
       <div class="gate-logo">SF</div>
-      <h2>Stocked Fridge</h2>
-      <p>This is a private kitchen tracker. Enter the password to continue.</p>
-      <input
-        type="password"
-        id="gate-input"
-        class="gate-input"
-        placeholder="Password"
-        autocomplete="current-password"
-        onkeydown="if(event.key==='Enter') checkPassword()"
-      >
+      <h2>Stocked<strong>Fridge</strong></h2>
+      <p>Enter the password to continue.</p>
+      <input type="password" id="gate-input" class="gate-input" placeholder="Password"
+        autocomplete="current-password" onkeydown="if(event.key==='Enter') checkPassword()">
       <button class="gate-btn" onclick="checkPassword()">Enter</button>
       <p class="gate-error" id="gate-error"></p>
     </div>
   </div>
 
-  <!-- ── APP (hidden until authenticated) ── -->
+  <!-- ── APP ── -->
   <div id="app" style="display:none">
 
-    <div class="page">
-      <header class="nav">
-        <div class="nav-inner">
-          <a class="brand" href="#">
-            <div class="brand-icon">SF</div>
-            <span class="brand-name">Stocked Fridge</span>
-          </a>
-          <nav class="tab-nav">
-            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
-            <button class="tab-btn" data-tab="pantry">Pantry</button>
-            <button class="tab-btn" data-tab="recipes">Recipes</button>
-            <button class="tab-btn" data-tab="bakinglog">Baking Log</button>
-            <button class="tab-btn" data-tab="settings">Settings</button>
-          </nav>
+    <!-- Top bar -->
+    <header class="topbar">
+      <span class="brand">Stocked<strong>Fridge</strong></span>
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="dashboard">Home</button>
+        <button class="tab-btn" data-tab="pantry">Pantry</button>
+        <button class="tab-btn" data-tab="recipes">Recipes</button>
+        <button class="tab-btn" data-tab="bakinglog">Baking Log</button>
+      </nav>
+      <button class="settings-btn" onclick="toggleSettings()" title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- ── DASHBOARD ── -->
+    <section class="tab-section active" id="tab-dashboard">
+      <!-- Kitchen illustration -->
+      <div class="kitchen-wrap">
+        <svg class="kitchen-svg" viewBox="0 0 1000 310" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <!-- Background wall -->
+          <rect width="1000" height="310" fill="#ede9e0"/>
+
+          <!-- Counter base -->
+          <rect x="72" y="248" width="880" height="52" rx="6" fill="#9b7340"/>
+          <!-- Counter top surface -->
+          <rect x="72" y="240" width="880" height="13" rx="3" fill="#b5924f"/>
+
+          <!-- ── STOVE ── -->
+          <!-- Range hood -->
+          <rect x="82" y="52" width="208" height="26" rx="4" fill="#5a9080"/>
+          <rect x="86" y="55" width="200" height="20" rx="3" fill="#6aaa96"/>
+          <!-- Hood trim -->
+          <rect x="82" y="74" width="208" height="6" fill="#4a8070"/>
+          <!-- Stove body -->
+          <rect x="90" y="80" width="195" height="162" rx="6" fill="#7aaa96"/>
+          <!-- Burner panel bg -->
+          <rect x="100" y="92" width="175" height="110" rx="5" fill="#6a9a88"/>
+          <!-- Burner 1 TL -->
+          <circle cx="148" cy="132" r="26" fill="#3d6e5c"/><circle cx="148" cy="132" r="17" fill="#2c5244"/>
+          <!-- Burner 2 TR -->
+          <circle cx="238" cy="132" r="26" fill="#3d6e5c"/><circle cx="238" cy="132" r="17" fill="#2c5244"/>
+          <!-- Burner 3 BL -->
+          <circle cx="148" cy="180" r="26" fill="#3d6e5c"/><circle cx="148" cy="180" r="17" fill="#2c5244"/>
+          <!-- Burner 4 BR -->
+          <circle cx="238" cy="180" r="26" fill="#3d6e5c"/><circle cx="238" cy="180" r="17" fill="#2c5244"/>
+          <!-- Knob dots -->
+          <circle cx="126" cy="214" r="5" fill="#d88060"/><circle cx="148" cy="216" r="5" fill="#d88060"/>
+          <circle cx="192" cy="216" r="5" fill="#d88060"/><circle cx="232" cy="214" r="5" fill="#d88060"/>
+          <!-- Oven door -->
+          <rect x="100" y="220" width="175" height="22" rx="4" fill="#3d6e5c"/>
+          <!-- Oven window -->
+          <rect x="110" y="224" width="155" height="13" rx="3" fill="#1a3028" opacity="0.65"/>
+
+          <!-- ── WINDOW ── -->
+          <!-- Left curtain -->
+          <rect x="302" y="38" width="58" height="204" rx="16" fill="#e89a82"/>
+          <!-- Right curtain -->
+          <rect x="580" y="38" width="58" height="204" rx="16" fill="#e89a82"/>
+          <!-- Window frame -->
+          <rect x="348" y="62" width="244" height="180" rx="5" fill="#d8d0be"/>
+          <!-- Sky glass -->
+          <rect x="356" y="70" width="228" height="164" rx="3" fill="#c4dce8"/>
+          <!-- Window dividers -->
+          <rect x="468" y="70" width="4" height="164" fill="#d8d0be"/>
+          <rect x="356" y="152" width="228" height="4" fill="#d8d0be"/>
+          <!-- Windowsill -->
+          <rect x="316" y="240" width="308" height="11" rx="2" fill="#ccc4b0"/>
+
+          <!-- Small plant left -->
+          <rect x="330" y="214" width="22" height="28" rx="5" fill="#c08858"/>
+          <ellipse cx="341" cy="207" rx="17" ry="14" fill="#4f9060"/>
+          <ellipse cx="341" cy="202" rx="10" ry="8" fill="#3d7848"/>
+
+          <!-- Fruit / tomatoes -->
+          <ellipse cx="470" cy="244" rx="35" ry="9" fill="#e0d8c8"/>
+          <circle cx="456" cy="232" r="12" fill="#e06848"/>
+          <circle cx="470" cy="228" r="12" fill="#d85e40"/>
+          <circle cx="484" cy="232" r="12" fill="#e06848"/>
+
+          <!-- Mug -->
+          <rect x="508" y="220" width="28" height="24" rx="5" fill="#f4f0e8"/>
+          <rect x="510" y="222" width="24" height="20" rx="3" fill="#eee8de"/>
+          <path d="M536 226 Q550 226 550 234 Q550 242 536 242" stroke="#d0c8b8" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+          <!-- Small plant right -->
+          <rect x="582" y="214" width="22" height="28" rx="5" fill="#c08858"/>
+          <ellipse cx="593" cy="207" rx="17" ry="14" fill="#4f9060"/>
+          <ellipse cx="593" cy="202" rx="10" ry="8" fill="#3d7848"/>
+
+          <!-- ── PANTRY CABINET ── -->
+          <rect x="650" y="80" width="158" height="162" rx="5" fill="#a07848"/>
+          <rect x="657" y="87" width="144" height="148" rx="3" fill="#906838"/>
+          <!-- Left door -->
+          <rect x="659" y="89" width="64" height="144" rx="4" fill="#b09050"/>
+          <rect x="666" y="96" width="50" height="58" rx="3" fill="#a07848" opacity="0.35"/>
+          <rect x="666" y="162" width="50" height="62" rx="3" fill="#a07848" opacity="0.35"/>
+          <!-- Right door -->
+          <rect x="729" y="89" width="64" height="144" rx="4" fill="#b09050"/>
+          <rect x="736" y="96" width="50" height="58" rx="3" fill="#a07848" opacity="0.35"/>
+          <rect x="736" y="162" width="50" height="62" rx="3" fill="#a07848" opacity="0.35"/>
+          <!-- Handles -->
+          <rect x="717" y="152" width="5" height="26" rx="2.5" fill="#806028"/>
+          <rect x="730" y="152" width="5" height="26" rx="2.5" fill="#806028"/>
+
+          <!-- ── FRIDGE ── -->
+          <rect x="820" y="38" width="158" height="208" rx="9" fill="#f0ece6"/>
+          <rect x="820" y="38" width="158" height="208" rx="9" fill="none" stroke="#ddd8d0" stroke-width="2"/>
+          <!-- Handle -->
+          <rect x="826" y="88" width="7" height="56" rx="3.5" fill="#ccc4ba"/>
+          <!-- Freezer section -->
+          <rect x="830" y="47" width="140" height="72" rx="5" fill="#d8eaf4"/>
+          <!-- Snowflake -->
+          <text x="900" y="97" text-anchor="middle" font-size="34" fill="#7ab4d4" font-family="Georgia,serif">✱</text>
+          <!-- Divider -->
+          <rect x="830" y="121" width="140" height="2" fill="#d4d0c8"/>
+          <!-- COOL section -->
+          <rect x="830" y="125" width="140" height="52" rx="0" fill="#f5f0ea"/>
+          <text x="900" y="158" text-anchor="middle" font-size="11" font-family="ui-sans-serif,sans-serif" fill="#a89880" letter-spacing="4" font-weight="600">COOL</text>
+          <!-- Divider -->
+          <rect x="830" y="179" width="140" height="2" fill="#d4d0c8"/>
+          <!-- Bottom shelf/crisper -->
+          <rect x="837" y="187" width="126" height="42" rx="5" fill="#e4dfd4"/>
+          <rect x="840" y="220" width="120" height="3" rx="1" fill="#cec9bf"/>
+        </svg>
+      </div>
+
+      <!-- Hero info card -->
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div id="hero-recipe">
+            <p class="hero-label">Add items to your pantry to see what you can make</p>
+            <h2 class="hero-name">—</h2>
+          </div>
+          <p id="hero-count" class="hero-count"></p>
+          <div class="hero-divider"></div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-val" id="stat-fridge">0</span>
+              <span class="hero-stat-label">in the fridge</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" id="stat-freezer">0</span>
+              <span class="hero-stat-label">in the freezer</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" id="stat-pantry-ct">0</span>
+              <span class="hero-stat-label">in the pantry</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" id="stat-recipes">0</span>
+              <span class="hero-stat-label">recipes</span>
+            </div>
+          </div>
         </div>
-      </header>
 
-      <main>
+        <!-- Expiring alert (shown only when items expiring) -->
+        <div id="dash-expiring-container" style="display:none">
+          <p class="section-label">Use these soon</p>
+          <div id="dash-expiring" class="item-list"></div>
+        </div>
+      </div>
+    </section>
 
-        <!-- DASHBOARD -->
-        <section class="tab-section active" id="tab-dashboard">
-          <div class="container section-pad">
-            <div class="section-head">
-              <h2>Kitchen Overview</h2>
-              <p id="dashboard-date"></p>
-            </div>
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-icon">🥫</div>
-                <div>
-                  <div class="stat-val" id="stat-total">0</div>
-                  <div class="stat-label">Pantry Items</div>
-                </div>
-              </div>
-              <div class="stat-card warn">
-                <div class="stat-icon">⏰</div>
-                <div>
-                  <div class="stat-val" id="stat-expiring">0</div>
-                  <div class="stat-label">Expiring Soon</div>
-                </div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon">📖</div>
-                <div>
-                  <div class="stat-val" id="stat-recipes">0</div>
-                  <div class="stat-label">Recipes Available</div>
-                </div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon">🧁</div>
-                <div>
-                  <div class="stat-val" id="stat-bakes">0</div>
-                  <div class="stat-label">Bakes Logged</div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-grid">
-              <div>
-                <p class="sub-head">Expiring Soon</p>
-                <div id="dash-expiring" class="item-list">
-                  <p class="empty-msg">No items expiring soon.</p>
-                </div>
-              </div>
-              <div>
-                <p class="sub-head">Recent Baking</p>
-                <div id="dash-recent-bakes" class="item-list">
-                  <p class="empty-msg">No baking logged yet.</p>
-                </div>
-              </div>
-            </div>
-            <div class="ai-card">
-              <div class="ai-card-head">
-                <span class="ai-badge">RECIPES</span>
-                <h3>What can you make right now?</h3>
-              </div>
-              <p class="muted" style="margin-bottom:14px">Recipes you can make with your current pantry (80%+ match).</p>
-              <div id="dash-recipes" class="recipe-quick-list">
-                <p class="empty-msg">Add items to your pantry to see recipe suggestions.</p>
-              </div>
-            </div>
+    <!-- ── PANTRY ── -->
+    <section class="tab-section" id="tab-pantry">
+      <div class="content-wrap">
+        <div class="content-head">
+          <div>
+            <h2>Pantry</h2>
+            <p class="muted">Track everything in your kitchen.</p>
           </div>
-        </section>
+          <button class="btn" onclick="openAddItem()">+ Add Item</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" class="search-input" id="pantry-search" placeholder="Search ingredients…" oninput="renderPantry()">
+        </div>
+        <div id="category-filters" class="pill-row" style="margin-bottom:20px"></div>
+        <div id="pantry-grid" class="pantry-grid"></div>
+      </div>
+    </section>
 
-        <!-- PANTRY -->
-        <section class="tab-section" id="tab-pantry">
-          <div class="container section-pad">
-            <div class="section-head between">
-              <div>
-                <h2>Pantry</h2>
-                <p>Track everything in your kitchen.</p>
-              </div>
-              <button class="btn" onclick="openAddItem()">+ Add Item</button>
-            </div>
-            <div class="filter-bar">
-              <input type="text" class="search-input" id="pantry-search" placeholder="Search ingredients…" oninput="renderPantry()">
-            </div>
-            <div class="category-filters" id="category-filters" style="margin-bottom:20px"></div>
-            <div id="pantry-grid" class="pantry-grid"></div>
+    <!-- ── RECIPES ── -->
+    <section class="tab-section" id="tab-recipes">
+      <div class="content-wrap">
+        <div class="content-head">
+          <div>
+            <h2>Recipes</h2>
+            <p class="muted">What you can cook with what you have.</p>
           </div>
-        </section>
-
-        <!-- RECIPES -->
-        <section class="tab-section" id="tab-recipes">
-          <div class="container section-pad">
-            <div class="section-head">
-              <h2>Recipes</h2>
-              <p>Find what you can cook or bake with what you have.</p>
-            </div>
-            <div class="recipe-controls">
-              <div class="filter-bar" style="margin-bottom:12px">
-                <input type="text" class="search-input" id="recipe-search" placeholder="Search recipes or ingredients…" oninput="renderRecipes()">
-              </div>
-              <div class="recipe-filter-row">
-                <button class="pill-btn active" data-filter="all" onclick="setRecipeFilter('all')">All</button>
-                <button class="pill-btn" data-filter="can-make" onclick="setRecipeFilter('can-make')">Can Make Now</button>
-                <button class="pill-btn" data-filter="almost" onclick="setRecipeFilter('almost')">Almost There</button>
-                <button class="pill-btn" data-filter="baking" onclick="setRecipeFilter('baking')">Baking</button>
-                <button class="pill-btn" data-filter="cooking" onclick="setRecipeFilter('cooking')">Cooking</button>
-              </div>
-            </div>
-            <div id="recipe-grid" class="recipe-grid"></div>
-            <div class="ai-card" id="ai-recipe-gen" style="display:none">
-              <div class="ai-card-head">
-                <span class="ai-badge">AI</span>
-                <h3>Generate a Custom Recipe</h3>
-              </div>
-              <p class="muted" style="margin-bottom:8px">Tell Claude what you're craving and it'll craft a recipe from your pantry.</p>
-              <textarea id="ai-recipe-prompt" class="ai-input" placeholder="e.g. I want something sweet with the bananas and chocolate chips I have…"></textarea>
-              <button class="btn" onclick="generateAIRecipe()">Generate Recipe</button>
-              <div id="ai-recipe-result" class="ai-result" style="display:none"></div>
-            </div>
+        </div>
+        <div class="filter-bar" style="margin-bottom:12px">
+          <input type="text" class="search-input" id="recipe-search" placeholder="Search recipes or ingredients…" oninput="renderRecipes()">
+        </div>
+        <div class="pill-row" style="margin-bottom:20px">
+          <button class="pill-btn active" data-filter="all" onclick="setRecipeFilter('all')">All</button>
+          <button class="pill-btn" data-filter="can-make" onclick="setRecipeFilter('can-make')">Can Make Now</button>
+          <button class="pill-btn" data-filter="almost" onclick="setRecipeFilter('almost')">Almost There</button>
+          <button class="pill-btn" data-filter="baking" onclick="setRecipeFilter('baking')">Baking</button>
+          <button class="pill-btn" data-filter="cooking" onclick="setRecipeFilter('cooking')">Cooking</button>
+        </div>
+        <div id="recipe-grid" class="recipe-grid"></div>
+        <div class="ai-card" id="ai-recipe-gen" style="display:none">
+          <div class="ai-card-head">
+            <span class="ai-badge">AI</span>
+            <h3>Generate a Custom Recipe</h3>
           </div>
-        </section>
+          <p class="muted" style="margin-bottom:8px">Tell Claude what you're craving and it'll craft a recipe from your pantry.</p>
+          <textarea id="ai-recipe-prompt" class="ai-input" placeholder="e.g. I want something sweet with the bananas and chocolate chips I have…"></textarea>
+          <button class="btn" onclick="generateAIRecipe()">Generate Recipe</button>
+          <div id="ai-recipe-result" class="ai-result" style="display:none"></div>
+        </div>
+      </div>
+    </section>
 
-        <!-- BAKING LOG -->
-        <section class="tab-section" id="tab-bakinglog">
-          <div class="container section-pad">
-            <div class="section-head between">
-              <div>
-                <h2>Baking Log</h2>
-                <p>Track your sessions, rate results, and learn from your bakes.</p>
-              </div>
-              <button class="btn" onclick="openAddBake()">+ Log a Bake</button>
-            </div>
-            <div id="bake-log-list" class="bake-log-list"></div>
-            <div class="ai-card" id="ai-bake-analysis" style="display:none">
-              <div class="ai-card-head">
-                <span class="ai-badge">AI</span>
-                <h3>Baking Analysis</h3>
-              </div>
-              <p class="muted" style="margin-bottom:14px">Claude will analyze your baking history, spot patterns, and give you personalized tips.</p>
-              <button class="btn" onclick="analyzeBaking()">Analyze My Baking</button>
-              <div id="ai-analysis-result" class="ai-result" style="display:none"></div>
-            </div>
+    <!-- ── BAKING LOG ── -->
+    <section class="tab-section" id="tab-bakinglog">
+      <div class="content-wrap">
+        <div class="content-head">
+          <div>
+            <h2>Baking Log</h2>
+            <p class="muted">Track sessions and learn from your bakes.</p>
           </div>
-        </section>
-
-        <!-- SETTINGS -->
-        <section class="tab-section" id="tab-settings">
-          <div class="container section-pad">
-            <div class="section-head">
-              <h2>Settings</h2>
-              <p>Customize your experience.</p>
-            </div>
-            <div class="settings-grid">
-              <div class="card">
-                <h3>🤖 Claude AI Integration</h3>
-                <p class="muted" style="margin-bottom:16px">Add your Anthropic API key to unlock AI-powered recipe generation, baking analysis, and ingredient substitution suggestions. Stored only in your browser.</p>
-                <div class="form-group">
-                  <label>Anthropic API Key</label>
-                  <input type="password" id="api-key-input" class="form-input" placeholder="sk-ant-…">
-                  <p class="hint">Never shared — stored locally in your browser only.</p>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px">
-                  <button class="btn" onclick="saveApiKey()">Save Key</button>
-                  <span class="key-status" id="key-status"></span>
-                </div>
-              </div>
-              <div class="card">
-                <h3>🔄 Ingredient Substitutes</h3>
-                <p class="muted" style="margin-bottom:12px">Running low on something? Look up tested substitutes instantly.</p>
-                <div class="form-group">
-                  <label>Search for an ingredient</label>
-                  <input type="text" id="sub-search" class="form-input" placeholder="e.g. butter, eggs, flour…" oninput="renderSubstitutes()">
-                </div>
-                <div id="sub-results"></div>
-              </div>
-              <div class="card danger-card">
-                <h3>🗑️ Clear All Data</h3>
-                <p class="muted" style="margin-bottom:14px">Permanently removes your pantry items and baking log from this browser. Cannot be undone.</p>
-                <button class="btn btn-danger" onclick="confirmClearData()">Clear All Data</button>
-              </div>
-            </div>
+          <button class="btn" onclick="openAddBake()">+ Log a Bake</button>
+        </div>
+        <div id="bake-log-list" class="bake-log-list"></div>
+        <div class="ai-card" id="ai-bake-analysis" style="display:none">
+          <div class="ai-card-head">
+            <span class="ai-badge">AI</span>
+            <h3>Baking Analysis</h3>
           </div>
-        </section>
+          <p class="muted" style="margin-bottom:14px">Claude will analyze your baking history and give you personalized tips.</p>
+          <button class="btn" onclick="analyzeBaking()">Analyze My Baking</button>
+          <div id="ai-analysis-result" class="ai-result" style="display:none"></div>
+        </div>
+      </div>
+    </section>
 
-      </main>
-    </div><!-- .page -->
+    <!-- ── SETTINGS PANEL (slide-in) ── -->
+    <div id="settings-overlay" class="settings-overlay" onclick="toggleSettings()"></div>
+    <div id="settings-panel" class="settings-panel">
+      <div class="settings-head">
+        <h3>Settings</h3>
+        <button class="close-btn" onclick="toggleSettings()">×</button>
+      </div>
+      <div class="settings-body">
+        <div class="card">
+          <h4>🤖 Claude AI Integration</h4>
+          <p class="muted" style="margin-bottom:12px">Add your Anthropic API key to unlock AI recipe generation and baking analysis. Stored only in your browser.</p>
+          <div class="form-group">
+            <label>Anthropic API Key</label>
+            <input type="password" id="api-key-input" class="form-input" placeholder="sk-ant-…">
+            <p class="hint">Never shared — stays in your browser only.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <button class="btn" onclick="saveApiKey()">Save Key</button>
+            <span class="key-status" id="key-status"></span>
+          </div>
+        </div>
 
-    <!-- OVERLAY -->
+        <div class="card">
+          <h4>🔄 Ingredient Substitutes</h4>
+          <p class="muted" style="margin-bottom:10px">Running low on something? Find tested swaps instantly.</p>
+          <div class="form-group">
+            <input type="text" id="sub-search" class="form-input" placeholder="e.g. butter, eggs, flour…" oninput="renderSubstitutes()">
+          </div>
+          <div id="sub-results"></div>
+        </div>
+
+        <div class="card danger-card">
+          <h4>🗑️ Clear All Data</h4>
+          <p class="muted" style="margin-bottom:12px">Permanently removes all pantry items and baking log entries.</p>
+          <button class="btn btn-danger" onclick="confirmClearData()">Clear All Data</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERLAY (for modals) -->
     <div class="overlay" id="overlay" onclick="closeModal()"></div>
 
     <!-- MODAL: Add/Edit Item -->
@@ -322,12 +393,12 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Notes — what happened, what worked, what didn't</label>
-          <textarea id="bake-notes" class="form-input" rows="3" placeholder="Crumb was open and airy, crust was a bit thick. Next time reduce bake time by 5 min…"></textarea>
+          <label>Notes</label>
+          <textarea id="bake-notes" class="form-input" rows="3" placeholder="What worked, what didn't, what to try next time…"></textarea>
         </div>
         <div class="form-group">
           <label>Ingredients used (comma-separated)</label>
-          <input type="text" id="bake-ingredients" class="form-input" placeholder="flour, butter, eggs, sugar, vanilla…">
+          <input type="text" id="bake-ingredients" class="form-input" placeholder="flour, butter, eggs, sugar…">
         </div>
         <div class="form-group">
           <label>Tags</label>
@@ -344,38 +415,30 @@
   </div><!-- #app -->
 
   <script>
-    // ── Password gate ─────────────────────────────────────────────────────────
-    // Note: client-side gate — keeps casual visitors out, not determined ones.
     const PASS_HASH = "c244bfeada914d36e625b7f2e1862037ce6e54f114b499b2057ea27f9d33c697";
-
-    async function hashStr(str) {
-      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+    async function hashStr(s) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
     }
-
     async function checkPassword() {
-      const val = document.getElementById("gate-input").value;
-      const h   = await hashStr(val);
+      const h = await hashStr(document.getElementById("gate-input").value);
       if (h === PASS_HASH) {
-        sessionStorage.setItem("sf_auth", "1");
+        sessionStorage.setItem("sf_auth","1");
         document.getElementById("gate").style.display = "none";
         document.getElementById("app").style.display  = "block";
       } else {
         const err = document.getElementById("gate-error");
-        err.textContent = "Incorrect password. Try again.";
+        err.textContent = "Incorrect password.";
         document.getElementById("gate-input").value = "";
         document.getElementById("gate-input").focus();
-        setTimeout(() => err.textContent = "", 3000);
+        setTimeout(()=> err.textContent = "", 3000);
       }
     }
-
-    // Auto-unlock if already authenticated this session
-    if (sessionStorage.getItem("sf_auth") === "1") {
+    if (sessionStorage.getItem("sf_auth")==="1") {
       document.getElementById("gate").style.display = "none";
       document.getElementById("app").style.display  = "block";
     }
   </script>
-
   <script src="assets/js/data.js"></script>
   <script src="assets/js/ai.js"></script>
   <script src="assets/js/app.js"></script>
