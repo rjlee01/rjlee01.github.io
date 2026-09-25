@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects | Rayner Lee</title>
+  <meta name="description" content="Selected quantitative projects: EPU vs risky assets, NYC mobility dashboard, and a portfolio optimization lab." />
+  <meta property="og:title" content="Projects | Rayner Lee" />
+  <meta property="og:description" content="Selected quantitative projects: EPU vs risky assets, NYC mobility dashboard, and a portfolio optimization lab." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.raynerlee.com/projects.html" />
+  <meta property="og:image" content="https://www.raynerlee.com/assets/img/headshot.jpg" />
+  <meta name="theme-color" content="#0b1220" />
+  <script>try{var t=localStorage.getItem("theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-orb"></div>
+
+  <div class="page">
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">RL</span>Rayner Lee</a>
+
+        <nav class="nav-links" id="nav-links" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="projects.html" class="active" aria-current="page">Projects</a>
+          <a href="research.html">Research</a>
+          <a href="market-watch.html">Market Watch</a>
+          <a href="resume.html">Resume</a>
+          <a href="about.html">About</a>
+        </nav>
+
+        <div class="nav-tools">
+          <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" type="button">☾</button>
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false" type="button">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-head">
+        <div class="container">
+          <p class="pill">Projects</p>
+          <h1>Selected work</h1>
+          <p class="sub">Applied research and tools across markets, macro, and data engineering. Each one gets a problem, a method, and a result.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container stack">
+          <article class="card reveal" id="epu">
+            <div class="row">
+              <div>
+                <span class="num">01 · TIME SERIES · MACRO</span>
+                <h3>EPU vs Risky Assets</h3>
+                <p>An event-study look at how Economic Policy Uncertainty relates to returns, volatility, and risk premia across equities, commodities, crypto, and rates — with crisis regimes.</p>
+                <div class="tags"><span>Python</span><span>Regression</span><span>Event study</span></div>
+              </div>
+              <a class="link" href="assets/EPU_Risky_Assets.pdf" target="_blank" rel="noopener">Read the paper →</a>
+            </div>
+          </article>
+
+          <article class="card reveal" id="nyc-mobility">
+            <div class="row">
+              <div>
+                <span class="num">02 · DASHBOARDS · DATA ENGINEERING</span>
+                <h3>NYC Mobility Dashboard</h3>
+                <p>Taxi, FHV, CitiBike, and MTA data stitched together with weather and energy variables to study how conditions move demand across the city.</p>
+                <div class="tags"><span>Plotly</span><span>Data pipelines</span><span>SQL</span></div>
+              </div>
+              <span class="soon">Demo coming soon</span>
+            </div>
+          </article>
+
+          <article class="card reveal" id="portfolio-lab">
+            <div class="row">
+              <div>
+                <span class="num">03 · QUANT · OPTIMIZATION</span>
+                <h3>Portfolio Optimization Lab</h3>
+                <p>Portfolio construction under constraints, with drawdown controls and ranking-based selection workflows.</p>
+                <div class="tags"><span>Optimization</span><span>Risk</span><span>Backtesting</span></div>
+              </div>
+              <span class="soon">Write-up coming soon</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>© <span id="y"></span> Rayner Lee · Boston / NYC</span>
+        <span class="footer-links">
+          <a href="mailto:raynerjlee@gmail.com">Email</a>
+          <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

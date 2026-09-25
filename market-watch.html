@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Market Watch | Rayner Lee</title>
+  <meta name="description" content="A personal market dashboard tracking rates, equities, volatility and macro indicators." />
+  <meta property="og:title" content="Market Watch | Rayner Lee" />
+  <meta property="og:description" content="A personal market dashboard tracking rates, equities, volatility and macro indicators." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.raynerlee.com/market-watch.html" />
+  <meta property="og:image" content="https://www.raynerlee.com/assets/img/headshot.jpg" />
+  <meta name="theme-color" content="#0b1220" />
+  <script>try{var t=localStorage.getItem("theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-orb"></div>
+
+  <div class="page">
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="index.html"><span class="brand-mark">RL</span>Rayner Lee</a>
+
+        <nav class="nav-links" id="nav-links" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="research.html">Research</a>
+          <a href="market-watch.html" class="active" aria-current="page">Market Watch</a>
+          <a href="resume.html">Resume</a>
+          <a href="about.html">About</a>
+        </nav>
+
+        <div class="nav-tools">
+          <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" type="button">☾</button>
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false" type="button">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-head">
+        <div class="container">
+          <p class="pill">Market Watch</p>
+          <h1>My market watch</h1>
+          <p class="sub">A personal dashboard for rates, equities, volatility and macro — powered by my own code.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="mw-panel">
+            <h3>Coming soon</h3>
+            <p>The dashboard is being wired up. When it’s live, this page will show my daily read on the market with charts I can trace back to the code.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>© <span id="y"></span> Rayner Lee · Boston / NYC</span>
+        <span class="footer-links">
+          <a href="mailto:raynerjlee@gmail.com">Email</a>
+          <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
