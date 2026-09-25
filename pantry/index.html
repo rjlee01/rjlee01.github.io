@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stocked Fridge — Kitchen Tracker</title>
+  <meta name="description" content="Track your kitchen inventory, discover recipes, and analyze your cooking and baking.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <!-- ── PASSWORD GATE ── -->
+  <div id="gate">
+    <div class="gate-card">
+      <div class="gate-logo">SF</div>
+      <h2>Stocked Fridge</h2>
+      <p>This is a private kitchen tracker. Enter the password to continue.</p>
+      <input
+        type="password"
+        id="gate-input"
+        class="gate-input"
+        placeholder="Password"
+        autocomplete="current-password"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      >
+      <button class="gate-btn" onclick="checkPassword()">Enter</button>
+      <p class="gate-error" id="gate-error"></p>
+    </div>
+  </div>
+
+  <!-- ── APP (hidden until authenticated) ── -->
+  <div id="app" style="display:none">
+
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <a class="brand" href="#">
+            <div class="brand-icon">SF</div>
+            <span class="brand-name">Stocked Fridge</span>
+          </a>
+          <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="pantry">Pantry</button>
+            <button class="tab-btn" data-tab="recipes">Recipes</button>
+            <button class="tab-btn" data-tab="bakinglog">Baking Log</button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+
+        <!-- DASHBOARD -->
+        <section class="tab-section active" id="tab-dashboard">
+          <div class="container section-pad">
+            <div class="section-head">
+              <h2>Kitchen Overview</h2>
+              <p id="dashboard-date"></p>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon">🥫</div>
+                <div>
+                  <div class="stat-val" id="stat-total">0</div>
+                  <div class="stat-label">Pantry Items</div>
+                </div>
+              </div>
+              <div class="stat-card warn">
+                <div class="stat-icon">⏰</div>
+                <div>
+                  <div class="stat-val" id="stat-expiring">0</div>
+                  <div class="stat-label">Expiring Soon</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon">📖</div>
+                <div>
+                  <div class="stat-val" id="stat-recipes">0</div>
+                  <div class="stat-label">Recipes Available</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon">🧁</div>
+                <div>
+                  <div class="stat-val" id="stat-bakes">0</div>
+                  <div class="stat-label">Bakes Logged</div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-grid">
+              <div>
+                <p class="sub-head">Expiring Soon</p>
+                <div id="dash-expiring" class="item-list">
+                  <p class="empty-msg">No items expiring soon.</p>
+                </div>
+              </div>
+              <div>
+                <p class="sub-head">Recent Baking</p>
+                <div id="dash-recent-bakes" class="item-list">
+                  <p class="empty-msg">No baking logged yet.</p>
+                </div>
+              </div>
+            </div>
+            <div class="ai-card">
+              <div class="ai-card-head">
+                <span class="ai-badge">RECIPES</span>
+                <h3>What can you make right now?</h3>
+              </div>
+              <p class="muted" style="margin-bottom:14px">Recipes you can make with your current pantry (80%+ match).</p>
+              <div id="dash-recipes" class="recipe-quick-list">
+                <p class="empty-msg">Add items to your pantry to see recipe suggestions.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANTRY -->
+        <section class="tab-section" id="tab-pantry">
+          <div class="container section-pad">
+            <div class="section-head between">
+              <div>
+                <h2>Pantry</h2>
+                <p>Track everything in your kitchen.</p>
+              </div>
+              <button class="btn" onclick="openAddItem()">+ Add Item</button>
+            </div>
+            <div class="filter-bar">
+              <input type="text" class="search-input" id="pantry-search" placeholder="Search ingredients…" oninput="renderPantry()">
+            </div>
+            <div class="category-filters" id="category-filters" style="margin-bottom:20px"></div>
+            <div id="pantry-grid" class="pantry-grid"></div>
+          </div>
+        </section>
+
+        <!-- RECIPES -->
+        <section class="tab-section" id="tab-recipes">
+          <div class="container section-pad">
+            <div class="section-head">
+              <h2>Recipes</h2>
+              <p>Find what you can cook or bake with what you have.</p>
+            </div>
+            <div class="recipe-controls">
+              <div class="filter-bar" style="margin-bottom:12px">
+                <input type="text" class="search-input" id="recipe-search" placeholder="Search recipes or ingredients…" oninput="renderRecipes()">
+              </div>
+              <div class="recipe-filter-row">
+                <button class="pill-btn active" data-filter="all" onclick="setRecipeFilter('all')">All</button>
+                <button class="pill-btn" data-filter="can-make" onclick="setRecipeFilter('can-make')">Can Make Now</button>
+                <button class="pill-btn" data-filter="almost" onclick="setRecipeFilter('almost')">Almost There</button>
+                <button class="pill-btn" data-filter="baking" onclick="setRecipeFilter('baking')">Baking</button>
+                <button class="pill-btn" data-filter="cooking" onclick="setRecipeFilter('cooking')">Cooking</button>
+              </div>
+            </div>
+            <div id="recipe-grid" class="recipe-grid"></div>
+            <div class="ai-card" id="ai-recipe-gen" style="display:none">
+              <div class="ai-card-head">
+                <span class="ai-badge">AI</span>
+                <h3>Generate a Custom Recipe</h3>
+              </div>
+              <p class="muted" style="margin-bottom:8px">Tell Claude what you're craving and it'll craft a recipe from your pantry.</p>
+              <textarea id="ai-recipe-prompt" class="ai-input" placeholder="e.g. I want something sweet with the bananas and chocolate chips I have…"></textarea>
+              <button class="btn" onclick="generateAIRecipe()">Generate Recipe</button>
+              <div id="ai-recipe-result" class="ai-result" style="display:none"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BAKING LOG -->
+        <section class="tab-section" id="tab-bakinglog">
+          <div class="container section-pad">
+            <div class="section-head between">
+              <div>
+                <h2>Baking Log</h2>
+                <p>Track your sessions, rate results, and learn from your bakes.</p>
+              </div>
+              <button class="btn" onclick="openAddBake()">+ Log a Bake</button>
+            </div>
+            <div id="bake-log-list" class="bake-log-list"></div>
+            <div class="ai-card" id="ai-bake-analysis" style="display:none">
+              <div class="ai-card-head">
+                <span class="ai-badge">AI</span>
+                <h3>Baking Analysis</h3>
+              </div>
+              <p class="muted" style="margin-bottom:14px">Claude will analyze your baking history, spot patterns, and give you personalized tips.</p>
+              <button class="btn" onclick="analyzeBaking()">Analyze My Baking</button>
+              <div id="ai-analysis-result" class="ai-result" style="display:none"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="tab-section" id="tab-settings">
+          <div class="container section-pad">
+            <div class="section-head">
+              <h2>Settings</h2>
+              <p>Customize your experience.</p>
+            </div>
+            <div class="settings-grid">
+              <div class="card">
+                <h3>🤖 Claude AI Integration</h3>
+                <p class="muted" style="margin-bottom:16px">Add your Anthropic API key to unlock AI-powered recipe generation, baking analysis, and ingredient substitution suggestions. Stored only in your browser.</p>
+                <div class="form-group">
+                  <label>Anthropic API Key</label>
+                  <input type="password" id="api-key-input" class="form-input" placeholder="sk-ant-…">
+                  <p class="hint">Never shared — stored locally in your browser only.</p>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <button class="btn" onclick="saveApiKey()">Save Key</button>
+                  <span class="key-status" id="key-status"></span>
+                </div>
+              </div>
+              <div class="card">
+                <h3>🔄 Ingredient Substitutes</h3>
+                <p class="muted" style="margin-bottom:12px">Running low on something? Look up tested substitutes instantly.</p>
+                <div class="form-group">
+                  <label>Search for an ingredient</label>
+                  <input type="text" id="sub-search" class="form-input" placeholder="e.g. butter, eggs, flour…" oninput="renderSubstitutes()">
+                </div>
+                <div id="sub-results"></div>
+              </div>
+              <div class="card danger-card">
+                <h3>🗑️ Clear All Data</h3>
+                <p class="muted" style="margin-bottom:14px">Permanently removes your pantry items and baking log from this browser. Cannot be undone.</p>
+                <button class="btn btn-danger" onclick="confirmClearData()">Clear All Data</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div><!-- .page -->
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+    <!-- MODAL: Add/Edit Item -->
+    <div class="modal" id="modal-item">
+      <div class="modal-head">
+        <h3 id="modal-item-title">Add Item</h3>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <form id="item-form" onsubmit="saveItem(event)">
+        <div class="form-group">
+          <label>Item Name *</label>
+          <input type="text" id="item-name" class="form-input" required placeholder="e.g. All-purpose flour">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" id="item-qty" class="form-input" placeholder="2" step="0.1" min="0">
+          </div>
+          <div class="form-group">
+            <label>Unit</label>
+            <input type="text" id="item-unit" class="form-input" placeholder="cups, lbs, oz…">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="item-category" class="form-input">
+            <option value="baking">🌾 Baking</option>
+            <option value="produce">🥬 Produce</option>
+            <option value="dairy">🥛 Dairy</option>
+            <option value="proteins">🥩 Proteins</option>
+            <option value="pantry">🥫 Pantry</option>
+            <option value="spices">🫙 Spices</option>
+            <option value="frozen">🧊 Frozen</option>
+            <option value="beverages">🥤 Beverages</option>
+            <option value="other">📦 Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Expiry Date</label>
+          <input type="date" id="item-expiry" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <input type="text" id="item-notes" class="form-input" placeholder="e.g. opened, store in fridge…">
+        </div>
+        <input type="hidden" id="item-id">
+        <div class="form-actions">
+          <button type="button" class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn">Save Item</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- MODAL: Recipe detail -->
+    <div class="modal modal-wide" id="modal-recipe">
+      <div class="modal-head">
+        <h3 id="recipe-modal-name"></h3>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div id="recipe-modal-content"></div>
+    </div>
+
+    <!-- MODAL: Log a Bake -->
+    <div class="modal" id="modal-bake">
+      <div class="modal-head">
+        <h3 id="modal-bake-title">Log a Bake</h3>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <form id="bake-form" onsubmit="saveBake(event)">
+        <div class="form-group">
+          <label>What did you bake/cook? *</label>
+          <input type="text" id="bake-name" class="form-input" required placeholder="e.g. Sourdough bread, Chocolate chip cookies…">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="bake-date" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <select id="bake-rating" class="form-input">
+              <option value="5">⭐⭐⭐⭐⭐ Amazing!</option>
+              <option value="4" selected>⭐⭐⭐⭐ Really good</option>
+              <option value="3">⭐⭐⭐ Pretty good</option>
+              <option value="2">⭐⭐ Needs work</option>
+              <option value="1">⭐ Didn't work out</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes — what happened, what worked, what didn't</label>
+          <textarea id="bake-notes" class="form-input" rows="3" placeholder="Crumb was open and airy, crust was a bit thick. Next time reduce bake time by 5 min…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Ingredients used (comma-separated)</label>
+          <input type="text" id="bake-ingredients" class="form-input" placeholder="flour, butter, eggs, sugar, vanilla…">
+        </div>
+        <div class="form-group">
+          <label>Tags</label>
+          <input type="text" id="bake-tags" class="form-input" placeholder="bread, sweet, gluten-free…">
+        </div>
+        <input type="hidden" id="bake-id">
+        <div class="form-actions">
+          <button type="button" class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn">Save Bake</button>
+        </div>
+      </form>
+    </div>
+
+  </div><!-- #app -->
+
+  <script>
+    // ── Password gate ─────────────────────────────────────────────────────────
+    // Note: client-side gate — keeps casual visitors out, not determined ones.
+    const PASS_HASH = "3d0a97e6d9c1e7a37c67ebab2e4c6e7534d06e6da28f3c4de3df2fc11c9b29a3";
+
+    async function hashStr(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+    }
+
+    async function checkPassword() {
+      const val = document.getElementById("gate-input").value;
+      const h   = await hashStr(val);
+      if (h === PASS_HASH) {
+        sessionStorage.setItem("sf_auth", "1");
+        document.getElementById("gate").style.display = "none";
+        document.getElementById("app").style.display  = "block";
+      } else {
+        const err = document.getElementById("gate-error");
+        err.textContent = "Incorrect password. Try again.";
+        document.getElementById("gate-input").value = "";
+        document.getElementById("gate-input").focus();
+        setTimeout(() => err.textContent = "", 3000);
+      }
+    }
+
+    // Auto-unlock if already authenticated this session
+    if (sessionStorage.getItem("sf_auth") === "1") {
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("app").style.display  = "block";
+    }
+  </script>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
