@@ -149,7 +149,43 @@
           <!-- Bottom shelf/crisper -->
           <rect x="837" y="187" width="126" height="42" rx="5" fill="#e4dfd4"/>
           <rect x="840" y="220" width="120" height="3" rx="1" fill="#cec9bf"/>
+
+          <!-- ── Clickable zones (on top of illustration) ── -->
+          <!-- Freezer zone -->
+          <g class="kitchen-zone" id="zone-freezer" onclick="openCompartment('freezer')">
+            <rect class="zone-bg zone-bg-freezer" x="820" y="38" width="158" height="87" rx="9 9 0 0" fill="rgba(180,220,240,0)"/>
+            <rect x="820" y="38" width="158" height="87" fill="transparent" rx="9 9 0 0"/>
+            <text x="899" y="28" text-anchor="middle" font-size="10" font-family="ui-sans-serif,sans-serif" fill="rgba(74,160,200,0)" class="zone-label" id="label-freezer">tap to open</text>
+          </g>
+          <!-- Fridge (cool) zone -->
+          <g class="kitchen-zone" id="zone-fridge" onclick="openCompartment('fridge')">
+            <rect class="zone-bg zone-bg-fridge" x="820" y="125" width="158" height="121" rx="0 0 9 9" fill="rgba(122,180,150,0)"/>
+            <rect x="820" y="125" width="158" height="121" fill="transparent" rx="0 0 9 9"/>
+            <text x="899" y="116" text-anchor="middle" font-size="10" font-family="ui-sans-serif,sans-serif" fill="rgba(74,130,100,0)" class="zone-label" id="label-fridge">tap to open</text>
+          </g>
+          <!-- Pantry cabinet zone -->
+          <g class="kitchen-zone" id="zone-pantry" onclick="openCompartment('pantry')">
+            <rect class="zone-bg zone-bg-pantry" x="650" y="80" width="158" height="162" rx="5" fill="rgba(160,120,72,0)"/>
+            <rect x="650" y="80" width="158" height="162" rx="5" fill="transparent"/>
+            <text x="729" y="72" text-anchor="middle" font-size="10" font-family="ui-sans-serif,sans-serif" fill="rgba(130,90,40,0)" class="zone-label" id="label-pantry">tap to open</text>
+          </g>
         </svg>
+      </div>
+
+      <!-- Compartment panel (appears on zone click) -->
+      <div id="compartment-panel" class="compartment-panel" style="display:none">
+        <div class="comp-header">
+          <div class="comp-title-row">
+            <span id="comp-icon" class="comp-icon"></span>
+            <h3 id="comp-title"></h3>
+            <span id="comp-count" class="comp-count muted"></span>
+          </div>
+          <div class="comp-header-actions">
+            <button class="btn btn-sm" id="comp-add-btn" onclick="openAddItemToComp()">+ Add Item</button>
+            <button class="close-btn" onclick="closeCompartment()">×</button>
+          </div>
+        </div>
+        <div id="comp-items" class="comp-items"></div>
       </div>
 
       <!-- Hero info card -->

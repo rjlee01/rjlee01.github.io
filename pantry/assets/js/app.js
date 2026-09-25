@@ -112,6 +112,68 @@ function renderDashboard() {
   }).join("");
 }
 
+// ── COMPARTMENT (kitchen zone click) ─────────────────────────────────────────
+const COMP_CONFIG = {
+  freezer: { title:"Freezer",  icon:"🧊", cats:["frozen"],                              addCat:"frozen" },
+  fridge:  { title:"Fridge",   icon:"🥛", cats:["dairy","produce","proteins"],           addCat:"dairy" },
+  pantry:  { title:"Pantry",   icon:"🥫", cats:["baking","pantry","spices","beverages","other"], addCat:"pantry" },
+};
+let activeComp = null;
+
+function openCompartment(type) {
+  activeComp = type;
+  const cfg   = COMP_CONFIG[type];
+  const items = pantry.filter(i => cfg.cats.includes(i.category));
+
+  // Highlight active zone, clear others
+  document.querySelectorAll(".kitchen-zone").forEach(z => z.classList.remove("active"));
+  const zone = document.getElementById("zone-" + type);
+  if (zone) zone.classList.add("active");
+
+  // Populate header
+  document.getElementById("comp-icon").textContent  = cfg.icon;
+  document.getElementById("comp-title").textContent = cfg.title;
+  document.getElementById("comp-count").textContent = `${items.length} item${items.length !== 1 ? "s" : ""}`;
+
+  // Populate items
+  const el = document.getElementById("comp-items");
+  if (!items.length) {
+    el.innerHTML = `<p class="comp-empty">Nothing in your ${cfg.title.toLowerCase()} yet.</p>`;
+  } else {
+    el.innerHTML = items.map(i => {
+      const d = daysUntilExpiry(i.expiryDate);
+      const cls = expiryClass(d);
+      return `<div class="comp-item" onclick="openEditItem('${i.id}')">
+        <span class="comp-item-name">${i.name}</span>
+        ${i.quantity ? `<span class="comp-item-qty">${i.quantity}${i.unit ? " " + i.unit : ""}</span>` : ""}
+        ${d !== null ? `<span class="expiry-pill ${cls}" style="font-size:10px;align-self:flex-start">${expiryLabel(d)}</span>` : ""}
+      </div>`;
+    }).join("");
+  }
+
+  // Show panel
+  document.getElementById("compartment-panel").style.display = "block";
+}
+
+function closeCompartment() {
+  document.querySelectorAll(".kitchen-zone").forEach(z => z.classList.remove("active"));
+  document.getElementById("compartment-panel").style.display = "none";
+  activeComp = null;
+}
+
+function openAddItemToComp() {
+  const cat = activeComp ? COMP_CONFIG[activeComp].addCat : "pantry";
+  openAddItem();
+  // Pre-select the right category after the modal opens
+  setTimeout(() => {
+    const sel = document.getElementById("item-category");
+    if (sel) sel.value = cat;
+  }, 0);
+}
+
+// Refresh compartment after save if it's open
+const _origSaveItem = saveItem;
+
 // ── PANTRY ────────────────────────────────────────────────────────────────────
 const CATEGORIES = ["all","baking","produce","dairy","proteins","pantry","spices","frozen","beverages","other"];
 let activeCategory = "all";
@@ -197,11 +259,13 @@ function saveItem(e) {
   } else { pantry.push(item); }
   save("sf_pantry", pantry);
   closeModal(); renderPantry(); renderDashboard();
+  if (activeComp) openCompartment(activeComp);
 }
 function deleteItem(id) {
   if (!confirm("Remove this item?")) return;
   pantry = pantry.filter(i => i.id !== id);
   save("sf_pantry", pantry); renderPantry(); renderDashboard();
+  if (activeComp) openCompartment(activeComp);
 }
 
 // ── RECIPES ───────────────────────────────────────────────────────────────────
@@ -448,6 +512,9 @@ function closeModal() {
 }
 
 // ── Expose to window ──────────────────────────────────────────────────────────
+window.openCompartment   = openCompartment;
+window.closeCompartment  = closeCompartment;
+window.openAddItemToComp = openAddItemToComp;
 window.toggleSettings   = toggleSettings;
 window.openAddItem      = openAddItem;
 window.openEditItem     = openEditItem;

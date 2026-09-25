@@ -110,6 +110,64 @@ body {
 }
 .kitchen-svg { display: block; width: 100%; max-height: 340px; object-fit: cover; }
 
+/* ── Kitchen interactive zones ── */
+.kitchen-zone { cursor: pointer; }
+.kitchen-zone .zone-bg { transition: fill .18s; }
+
+.kitchen-zone:hover .zone-bg-freezer,
+.kitchen-zone.active .zone-bg-freezer  { fill: rgba(180,220,240,.28) !important; }
+.kitchen-zone:hover .zone-bg-fridge,
+.kitchen-zone.active .zone-bg-fridge   { fill: rgba(122,180,150,.24) !important; }
+.kitchen-zone:hover .zone-bg-pantry,
+.kitchen-zone.active .zone-bg-pantry   { fill: rgba(160,120,72,.22) !important; }
+
+.kitchen-zone:hover .zone-label         { fill: rgba(80,80,80,.55) !important; }
+.kitchen-zone.active .zone-label        { fill: rgba(80,80,80,.0) !important; }
+
+/* ── Compartment panel ── */
+.compartment-panel {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  animation: slideDown .22s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.comp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 10px; gap: 12px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+.comp-title-row {
+  display: flex; align-items: center; gap: 10px;
+}
+.comp-icon  { font-size: 22px; }
+.comp-header h3 { font-size: 17px; font-weight: 800; margin: 0; }
+.comp-count { font-size: 13px; }
+.comp-header-actions { display: flex; align-items: center; gap: 8px; }
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+
+.comp-items {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 14px 20px 18px;
+  max-height: 220px; overflow-y: auto;
+}
+.comp-item {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 10px 14px; border-radius: 10px;
+  background: var(--card); border: 1.5px solid var(--line);
+  cursor: pointer; min-width: 120px; max-width: 180px;
+  transition: border-color .15s, transform .12s;
+}
+.comp-item:hover { border-color: var(--primary); transform: translateY(-1px); }
+.comp-item-name { font-size: 14px; font-weight: 700; }
+.comp-item-qty  { font-size: 12px; color: var(--primary); font-weight: 600; }
+.comp-empty {
+  width: 100%; padding: 20px 0;
+  color: var(--muted); font-size: 14px; font-style: italic;
+}
+
 /* ── Hero info card ── */
 .hero-card-wrap {
   padding: 20px 20px 28px;
