@@ -346,7 +346,7 @@
   <script>
     // ── Password gate ─────────────────────────────────────────────────────────
     // Note: client-side gate — keeps casual visitors out, not determined ones.
-    const PASS_HASH = "3d0a97e6d9c1e7a37c67ebab2e4c6e7534d06e6da28f3c4de3df2fc11c9b29a3";
+    const PASS_HASH = "c244bfeada914d36e625b7f2e1862037ce6e54f114b499b2057ea27f9d33c697";
 
     async function hashStr(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
