@@ -1,106 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects | Rayner Lee</title>
-  <meta name="description" content="Selected quantitative projects: EPU vs risky assets, NYC mobility dashboard, and a portfolio optimization lab." />
+  <meta name="description" content="Quantitative projects: EPU vs risky assets, pairs trading, portfolio optimization and an NYC mobility dashboard." />
   <meta property="og:title" content="Projects | Rayner Lee" />
-  <meta property="og:description" content="Selected quantitative projects: EPU vs risky assets, NYC mobility dashboard, and a portfolio optimization lab." />
+  <meta property="og:description" content="Quantitative projects: EPU vs risky assets, pairs trading, portfolio optimization and an NYC mobility dashboard." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.raynerlee.com/projects.html" />
   <meta property="og:image" content="https://www.raynerlee.com/assets/img/headshot.jpg" />
-  <meta name="theme-color" content="#0b1220" />
-  <script>try{var t=localStorage.getItem("theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta name="theme-color" content="#07090d" />
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%2307090d%27/%3E%3Crect x=%272%27 y=%272%27 width=%2728%27 height=%2728%27 fill=%27none%27 stroke=%27%23ffb000%27 stroke-width=%272%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-family=%27monospace%27 font-size=%2713%27 font-weight=%27700%27 fill=%27%23ffb000%27 text-anchor=%27middle%27%3ERL%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-orb"></div>
-
-  <div class="page">
-    <header class="nav">
-      <div class="container nav-inner">
-        <a class="brand" href="index.html"><span class="brand-mark">RL</span>Rayner Lee</a>
-
-        <nav class="nav-links" id="nav-links" aria-label="Main">
+  <header class="top">
+    <div class="tape" aria-hidden="true"><div class="tape-track"><span><b>▲</b>Time series</span><span><b>▲</b>Panel data</span><span><b>▲</b>Event studies</span><span><b>▲</b>Factor models</span><span><b>▲</b>Pairs trading</span><span><b>▲</b>Portfolio optimization</span><span><b>▲</b>Risk</span><span><b>▲</b>Volatility</span><span><b>▲</b>Regime analysis</span><span><b>▲</b>Monetary policy</span><span><b>▲</b>Backtesting</span><span><b>▲</b>Monte Carlo</span><span><b>▲</b>Time series</span><span><b>▲</b>Panel data</span><span><b>▲</b>Event studies</span><span><b>▲</b>Factor models</span><span><b>▲</b>Pairs trading</span><span><b>▲</b>Portfolio optimization</span><span><b>▲</b>Risk</span><span><b>▲</b>Volatility</span><span><b>▲</b>Regime analysis</span><span><b>▲</b>Monetary policy</span><span><b>▲</b>Backtesting</span><span><b>▲</b>Monte Carlo</span></div></div>
+    <div class="wrap nav-in">
+      <a class="brand" href="index.html"><span class="brand-mark">RL</span>RAYNER LEE<span class="slash">/ quant</span></a>
+      <nav class="nav-links" id="nav-links" aria-label="Main">
           <a href="index.html">Home</a>
           <a href="projects.html" class="active" aria-current="page">Projects</a>
           <a href="research.html">Research</a>
           <a href="market-watch.html">Market Watch</a>
           <a href="resume.html">Resume</a>
           <a href="about.html">About</a>
-        </nav>
-
-        <div class="nav-tools">
-          <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" type="button">☾</button>
-          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false" type="button">☰</button>
-        </div>
+      </nav>
+      <div class="tools">
+        <button class="icon-btn" id="theme-btn" type="button" aria-label="Toggle light or dark theme">Light</button>
+        <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false">Menu</button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="page-head">
-        <div class="container">
-          <p class="pill">Projects</p>
-          <h1>Selected work</h1>
-          <p class="sub">Applied research and tools across markets, macro, and data engineering. Each one gets a problem, a method, and a result.</p>
-        </div>
-      </section>
+  <main>
 
-      <section class="section">
-        <div class="container stack">
-          <article class="card reveal" id="epu">
-            <div class="row">
-              <div>
-                <span class="num">01 · TIME SERIES · MACRO</span>
-                <h3>EPU vs Risky Assets</h3>
-                <p>An event-study look at how Economic Policy Uncertainty relates to returns, volatility, and risk premia across equities, commodities, crypto, and rates — with crisis regimes.</p>
-                <div class="tags"><span>Python</span><span>Regression</span><span>Event study</span></div>
-              </div>
-              <a class="link" href="assets/EPU_Risky_Assets.pdf" target="_blank" rel="noopener">Read the paper →</a>
-            </div>
-          </article>
+    <section class="page-head"><div class="wrap">
+      <p class="eyebrow">Projects</p>
+      <h1>Selected work</h1>
+      <p class="sub">Applied research and tools across markets, macro and data engineering. Each entry lists the method, the stack and where it stands.</p>
+    </div></section>
+    <section class="section" style="border-top:0;padding-top:0"><div class="wrap"><div class="tbl-wrap reveal"><table class="tbl">
+          <thead><tr><th>ID</th><th>Project</th><th>Method</th><th>Stack</th><th>Status</th><th>Link</th></tr></thead>
+          <tbody>
+            <tr class="reveal"><td class="id">P-01</td>
+              <td><span class="name">EPU vs. Risky Assets</span><span class="desc">How Economic Policy Uncertainty relates to returns, volatility and risk premia across equities, commodities, crypto and rates, with crisis regimes.</span></td>
+              <td><span class="tag">Two-way fixed effects</span><span class="tag">Event study</span></td>
+              <td><span class="tag">Python</span><span class="tag">Panel data</span></td>
+              <td><span class="status ok">Complete</span></td>
+              <td><a class="link" href="assets/EPU_Risky_Assets.pdf" target="_blank" rel="noopener">PDF →</a></td></tr>
+            <tr class="reveal"><td class="id">P-02</td>
+              <td><span class="name">Pairs Trading: Correlation Testing</span><span class="desc">Statistical tests for highly correlated S&amp;P 500 pairs, with automated data collection and a factor-weighted personal portfolio targeting the Sharpe ratio.</span></td>
+              <td><span class="tag">Correlation</span><span class="tag">Sharpe</span><span class="tag">Stat. testing</span></td>
+              <td><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">YFinance</span></td>
+              <td><span class="status wip">Ongoing</span></td>
+              <td><span class="m">Write-up pending</span></td></tr>
+            <tr class="reveal"><td class="id">P-03</td>
+              <td><span class="name">Portfolio Optimization Lab</span><span class="desc">Portfolio construction under constraints, with drawdown controls and ranking-based selection workflows.</span></td>
+              <td><span class="tag">Optimization</span><span class="tag">Drawdown</span></td>
+              <td><span class="tag">Python</span></td>
+              <td><span class="status todo">Write-up pending</span></td>
+              <td><span class="m">&mdash;</span></td></tr>
+            <tr class="reveal"><td class="id">P-04</td>
+              <td><span class="name">NYC Mobility Dashboard</span><span class="desc">Taxi, FHV, CitiBike and MTA data joined with weather and energy variables to study what moves demand across the city.</span></td>
+              <td><span class="tag">Data engineering</span><span class="tag">EDA</span></td>
+              <td><span class="tag">Plotly</span><span class="tag">SQL</span></td>
+              <td><span class="status todo">Demo pending</span></td>
+              <td><span class="m">&mdash;</span></td></tr>
+          </tbody></table></div></div></section>
+  </main>
 
-          <article class="card reveal" id="nyc-mobility">
-            <div class="row">
-              <div>
-                <span class="num">02 · DASHBOARDS · DATA ENGINEERING</span>
-                <h3>NYC Mobility Dashboard</h3>
-                <p>Taxi, FHV, CitiBike, and MTA data stitched together with weather and energy variables to study how conditions move demand across the city.</p>
-                <div class="tags"><span>Plotly</span><span>Data pipelines</span><span>SQL</span></div>
-              </div>
-              <span class="soon">Demo coming soon</span>
-            </div>
-          </article>
-
-          <article class="card reveal" id="portfolio-lab">
-            <div class="row">
-              <div>
-                <span class="num">03 · QUANT · OPTIMIZATION</span>
-                <h3>Portfolio Optimization Lab</h3>
-                <p>Portfolio construction under constraints, with drawdown controls and ranking-based selection workflows.</p>
-                <div class="tags"><span>Optimization</span><span>Risk</span><span>Backtesting</span></div>
-              </div>
-              <span class="soon">Write-up coming soon</span>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <span>© <span id="y"></span> Rayner Lee · Boston / NYC</span>
-        <span class="footer-links">
-          <a href="mailto:raynerjlee@gmail.com">Email</a>
-          <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
-        </span>
-      </div>
-    </footer>
-  </div>
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span id="y">2026</span> RAYNER LEE · BOSTON / NYC · UPDATED 2026-09-26</span>
+      <span class="footer-links">
+        <a href="mailto:raynerjlee@gmail.com">Email</a>
+        <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
 
   <script src="assets/js/site.js"></script>
+
 </body>
 </html>

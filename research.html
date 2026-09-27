@@ -1,88 +1,80 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Research | Rayner Lee</title>
-  <meta name="description" content="Working papers and research notes on monetary policy surprises, economic policy uncertainty, and asset pricing." />
+  <meta name="description" content="Working papers on economic policy uncertainty, asset pricing and monetary policy surprises." />
   <meta property="og:title" content="Research | Rayner Lee" />
-  <meta property="og:description" content="Working papers and research notes on monetary policy surprises, economic policy uncertainty, and asset pricing." />
+  <meta property="og:description" content="Working papers on economic policy uncertainty, asset pricing and monetary policy surprises." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.raynerlee.com/research.html" />
   <meta property="og:image" content="https://www.raynerlee.com/assets/img/headshot.jpg" />
-  <meta name="theme-color" content="#0b1220" />
-  <script>try{var t=localStorage.getItem("theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta name="theme-color" content="#07090d" />
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%2307090d%27/%3E%3Crect x=%272%27 y=%272%27 width=%2728%27 height=%2728%27 fill=%27none%27 stroke=%27%23ffb000%27 stroke-width=%272%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-family=%27monospace%27 font-size=%2713%27 font-weight=%27700%27 fill=%27%23ffb000%27 text-anchor=%27middle%27%3ERL%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-orb"></div>
-
-  <div class="page">
-    <header class="nav">
-      <div class="container nav-inner">
-        <a class="brand" href="index.html"><span class="brand-mark">RL</span>Rayner Lee</a>
-
-        <nav class="nav-links" id="nav-links" aria-label="Main">
+  <header class="top">
+    <div class="tape" aria-hidden="true"><div class="tape-track"><span><b>▲</b>Time series</span><span><b>▲</b>Panel data</span><span><b>▲</b>Event studies</span><span><b>▲</b>Factor models</span><span><b>▲</b>Pairs trading</span><span><b>▲</b>Portfolio optimization</span><span><b>▲</b>Risk</span><span><b>▲</b>Volatility</span><span><b>▲</b>Regime analysis</span><span><b>▲</b>Monetary policy</span><span><b>▲</b>Backtesting</span><span><b>▲</b>Monte Carlo</span><span><b>▲</b>Time series</span><span><b>▲</b>Panel data</span><span><b>▲</b>Event studies</span><span><b>▲</b>Factor models</span><span><b>▲</b>Pairs trading</span><span><b>▲</b>Portfolio optimization</span><span><b>▲</b>Risk</span><span><b>▲</b>Volatility</span><span><b>▲</b>Regime analysis</span><span><b>▲</b>Monetary policy</span><span><b>▲</b>Backtesting</span><span><b>▲</b>Monte Carlo</span></div></div>
+    <div class="wrap nav-in">
+      <a class="brand" href="index.html"><span class="brand-mark">RL</span>RAYNER LEE<span class="slash">/ quant</span></a>
+      <nav class="nav-links" id="nav-links" aria-label="Main">
           <a href="index.html">Home</a>
           <a href="projects.html">Projects</a>
           <a href="research.html" class="active" aria-current="page">Research</a>
           <a href="market-watch.html">Market Watch</a>
           <a href="resume.html">Resume</a>
           <a href="about.html">About</a>
-        </nav>
-
-        <div class="nav-tools">
-          <button class="icon-btn" id="theme-btn" aria-label="Toggle dark mode" type="button">☾</button>
-          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false" type="button">☰</button>
-        </div>
+      </nav>
+      <div class="tools">
+        <button class="icon-btn" id="theme-btn" type="button" aria-label="Toggle light or dark theme">Light</button>
+        <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false">Menu</button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="page-head">
-        <div class="container">
-          <p class="pill">Research</p>
-          <h1>Papers &amp; notes</h1>
-          <p class="sub">Working papers and short research notes on monetary policy, uncertainty, and how investors and prices respond.</p>
-        </div>
-      </section>
+  <main>
 
-      <section class="section">
-        <div class="container stack">
-          <div class="card row reveal">
-            <div>
-              <span class="num">EVENT STUDY</span>
-              <h3>How Economic Policy Uncertainty (EPU) Affects Risky Asset Pricing and Volatility</h3>
-              <p>An event-study analysis of the relationship between EPU and asset returns, volatility, and risk premia.</p>
-            </div>
-            <a class="link" href="assets/EPU_Risky_Assets.pdf" target="_blank" rel="noopener">PDF →</a>
-          </div>
+    <section class="page-head"><div class="wrap">
+      <p class="eyebrow">Research</p>
+      <h1>Papers &amp; notes</h1>
+      <p class="sub">Working papers on uncertainty, monetary policy and how investors and prices respond.</p>
+    </div></section>
+    <section class="section" style="border-top:0;padding-top:0"><div class="wrap">
+      <div class="tbl-wrap reveal"><table class="tbl">
+        <thead><tr><th>Ref</th><th>Title</th><th>Method</th><th>Status</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td class="id">R-01</td>
+            <td><span class="name">How Economic Policy Uncertainty (EPU) Affects Risky Asset Pricing and Volatility</span><span class="desc">An event-study analysis of the relationship between EPU and asset returns, volatility and risk premia, differentiating asset-class impact during recessions.</span></td>
+            <td><span class="tag">Two-way fixed effects</span><span class="tag">Event study</span><span class="tag">Panel data</span></td>
+            <td><span class="status ok">Complete</span></td>
+            <td><a class="link" href="assets/EPU_Risky_Assets.pdf" target="_blank" rel="noopener">PDF →</a></td></tr>
+          <tr><td class="id">R-02</td>
+            <td><span class="name">Investor Adjustment After Monetary Policy Surprises</span><span class="desc">Behavioral response timing using high-frequency announcements and investor proxies.</span></td>
+            <td><span class="tag">High-frequency</span><span class="tag">Event study</span></td>
+            <td><span class="status todo">PDF pending</span></td>
+            <td><span class="m">&mdash;</span></td></tr>
+        </tbody></table></div>
+    </div></section>
+  </main>
 
-          <div class="card row reveal">
-            <div>
-              <span class="num">MONETARY POLICY</span>
-              <h3>Investor Adjustment After Monetary Policy Surprises</h3>
-              <p>Behavioral response timing using high-frequency announcements and investor proxies.</p>
-            </div>
-            <span class="soon">PDF coming soon</span>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <span>© <span id="y"></span> Rayner Lee · Boston / NYC</span>
-        <span class="footer-links">
-          <a href="mailto:raynerjlee@gmail.com">Email</a>
-          <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
-        </span>
-      </div>
-    </footer>
-  </div>
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span id="y">2026</span> RAYNER LEE · BOSTON / NYC · UPDATED 2026-09-26</span>
+      <span class="footer-links">
+        <a href="mailto:raynerjlee@gmail.com">Email</a>
+        <a href="https://github.com/rjlee01" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/raynerjlee" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
 
   <script src="assets/js/site.js"></script>
+
 </body>
 </html>

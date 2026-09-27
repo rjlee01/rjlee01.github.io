@@ -1,14 +1,15 @@
-// Theme toggle, mobile menu, footer year, scroll reveal.
+// Theme toggle (dark default), mobile menu, footer year, scroll reveal.
 (function () {
   var root = document.documentElement;
   var btn = document.getElementById("theme-btn");
-  function paint() { if (btn) btn.textContent = root.dataset.theme === "dark" ? "☀" : "☾"; }
+  function paint() { if (btn) btn.textContent = root.dataset.theme === "light" ? "Dark" : "Light"; }
   paint();
   if (btn) btn.addEventListener("click", function () {
-    var next = root.dataset.theme === "dark" ? "light" : "dark";
+    var next = root.dataset.theme === "light" ? "dark" : "light";
     root.dataset.theme = next;
     try { localStorage.setItem("theme", next); } catch (e) {}
     paint();
+    window.dispatchEvent(new Event("themechange"));
   });
 
   var menuBtn = document.getElementById("menu-btn");
@@ -25,6 +26,6 @@
   if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); return; }
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   items.forEach(function (el) { io.observe(el); });
 })();
